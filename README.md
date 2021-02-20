@@ -11,7 +11,9 @@
   - создание единого svg файла (sprite)
   - минификация html и javascript
   - настройка browsersync для html,css кода
+  - автоматическая выгрузка папки build в ветку gh-pages для отображения проекта на GitHub Pages
   
 Команды для наладки:
 1) npm i
 2) npm run start
+3) gulp deploy ( gh-pages )
