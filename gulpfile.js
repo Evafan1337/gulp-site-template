@@ -18,6 +18,9 @@ var include = require("posthtml-include");
 var del = require("del");
 var server = require("browser-sync").create();
 
+var ghpages = require('gh-pages');
+// var ghpages = require("gulp-gh-pages");
+
 gulp.task("css", function () {
 return gulp
 .src("source/less/style.less")
@@ -34,7 +37,7 @@ return gulp
 
 gulp.task("images", function () {
 return gulp
-.src(["source/img/*.jpg", "source/img/*.png", "source/img/*.svg", "source/img/icon-*.svg" ])
+.src(["source/img/*.jpg", "source/img/*.png", "source/img/*.svg", "source/img/icon-*.svg", "source/img/*.gif" ])
 .pipe(gulp.dest("build/img"));
 });
 
@@ -68,7 +71,7 @@ gulp.task("jsmin", function () {
 return gulp
 .src("source/js/*.js")
 .pipe(sourcemap.init())
-.pipe(uglify())
+// .pipe(uglify())
 .pipe(rename({ suffix: ".min" }))
 .pipe(sourcemap.write("."))
 .pipe(gulp.dest("build/js"));
@@ -113,3 +116,7 @@ gulp.series("clean", "copy", "jsmin", "css","images", "webp", "sprite", "html")
 );
 
 gulp.task("start", gulp.series("build", "server"));
+
+gulp.task('deploy', function() {
+  ghpages.publish('build', function(err) {});
+});
